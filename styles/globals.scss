@@ -1,0 +1,18 @@
+@import "./inc/preflight";
+@import "./inc/typography";
+@import "./inc/tailwind";
+@import "./inc/elements";
+
+:root {
+  font-family: $font-sans;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+}
