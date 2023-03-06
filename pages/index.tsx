@@ -311,7 +311,7 @@ const Home = (props: HomeProps) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-4">
-            {teamMembers.map((member) => (
+            {teamMembers.map((member: any) => (
               <div className="flex flex-col items-center gap-2" key={member.id}>
                 <img
                   className="rounded-full w-48 h-48 object-cover"
