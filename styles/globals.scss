@@ -3,6 +3,9 @@
 @import "./inc/tailwind";
 @import "./inc/elements";
 
+// pages
+@import "./pages/all";
+
 :root {
   font-family: $font-sans;
 }

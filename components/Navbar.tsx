@@ -2,11 +2,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import React, { useState } from "react";
 import Dropdown from "./elements/Dropdown";
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  Bars2Icon,
-} from "@heroicons/react/24/solid";
+import { HiChevronDown, HiChevronUp, HiMenuAlt4 } from "react-icons/hi";
 
 type TriggerProps = {
   name: string;
@@ -17,8 +13,8 @@ const Trigger = ({ name, isOpen }: TriggerProps) => {
     <div className="flex items-center justify-between gap-2 text-white">
       <p>{name}</p>
 
-      {isOpen && <ChevronUpIcon className="w-4 h-4" />}
-      {!isOpen && <ChevronDownIcon className="w-4 h-4" />}
+      {isOpen && <HiChevronUp className="w-4 h-4" />}
+      {!isOpen && <HiChevronDown className="w-4 h-4" />}
     </div>
   );
 };
@@ -64,13 +60,13 @@ const NavbarItem = ({ name, link, isChild, options }: NavbarItemProps) => {
 
 export type NavbarProps = {};
 const Navbar = (props: NavbarProps) => {
-  const [showMenu, setShowMenu] = useState(true);
+  const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
   return (
-    <div className="navbar bg-black text-white sticky top-0">
+    <div className="navbar bg-black text-white sticky top-0 z-10">
       <div className="container mx-auto">
         <div className="flex gap-12 justify-between items-center p-4 relative">
           <div className="logo">logo</div>
@@ -79,14 +75,14 @@ const Navbar = (props: NavbarProps) => {
             className="toggle justify-end flex md:hidden"
             onClick={toggleMenu}
           >
-            <Bars2Icon className="icon" />
+            <HiMenuAlt4 className="icon" />
           </div>
 
           <div
             className={clsx(
               "absolute top-14 left-0 w-full bg-black max-h-[90vh] overflow-auto",
               "md:static md:max-h-none md:overflow-visible",
-              !showMenu ? "hidden" : ""
+              !showMenu ? "hidden md:block" : ""
             )}
           >
             <div className="container mx-auto">

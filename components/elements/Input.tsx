@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React from "react";
 
 export type InputProps = {
@@ -19,7 +20,7 @@ const Input = (props: InputProps) => {
     <input
       type={type}
       id={name}
-      className="input"
+      className={clsx("input", varient)}
       placeholder={placeholder}
       value={value}
       onChange={change}

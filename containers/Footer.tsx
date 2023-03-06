@@ -30,13 +30,19 @@ const Footer = (props: FooterProps) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 items-center py-12">
-            <p>Be continuously updated with architecture and AI trends</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center py-12 gap-8">
+            <p className="text-2xl tracking-wider font-mono">
+              Be continuously updated with architecture and AI trends
+            </p>
             <div className="newsletter">
               <h2 className="font-serif">Join our newsletter</h2>
               <div className="flex">
-                <Field name="email" placeholder="email address"></Field>
-                <button className="btn btn-outline">subscribe</button>
+                <Field
+                  varient="outlined"
+                  name="email"
+                  placeholder="Email address"
+                ></Field>
+                <button className="btn btn-outline">Subscribe</button>
               </div>
             </div>
           </div>

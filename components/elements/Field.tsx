@@ -18,12 +18,14 @@ const Field = (props: FieldProps) => {
 
   return (
     <div className="field">
-      <label
-        htmlFor={name}
-        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-      >
-        {label}
-      </label>
+      {label && (
+        <label
+          htmlFor={name}
+          className={"block mb-2 text-sm font-medium text-gray-900"}
+        >
+          {label}
+        </label>
+      )}
       {children}
       {!children && <Input {...props}></Input>}
       {error && <p className="text-red-500">{error}</p>}

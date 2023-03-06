@@ -9,7 +9,7 @@
       @apply text-white bg-primary-500 hover:bg-primary-700;
     }
     &.btn-outline {
-      @apply text-black bg-white border border-black hover:bg-black hover:bg-opacity-10;
+      @apply bg-white border rounded-none bg-transparent hover:bg-black hover:bg-opacity-10;
     }
   }
   .dropdown {
@@ -27,6 +27,9 @@
   // form styles
   .input {
     @apply bg-gray-50 border border-gray-300 text-gray-900 rounded-lg block p-4 w-full text-xl;
+    &.outlined {
+      @apply rounded-none bg-transparent;
+    }
   }
   .textarea {
     @apply block text-xl p-2.5 w-full text-gray-900 bg-gray-50 rounded-lg border border-gray-300;
@@ -36,4 +39,7 @@
   svg.icon {
     @apply w-6 h-6;
   }
+}
+section {
+  @apply py-12;
 }
