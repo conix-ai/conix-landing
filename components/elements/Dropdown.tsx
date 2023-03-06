@@ -23,7 +23,7 @@ const Dropdown = ({ Trigger, options, children, onClick }: DropdownProps) => {
       <Menu>
         <Menu.Button
           className="btn btn-sm bg-transparent"
-          onClick={toggleMenuOpen}
+          // onClick={toggleMenuOpen}
         >
           <Trigger />
         </Menu.Button>
