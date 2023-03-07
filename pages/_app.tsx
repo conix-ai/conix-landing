@@ -1,7 +1,7 @@
 import "@/styles/globals.scss";
-import type { AppProps } from "next/app";
+import { AppProps } from "next/app";
 
-export type PageWithLayout = {
+type PageWithLayout = {
   Layout: (props: any) => JSX.Element;
 };
 
@@ -10,7 +10,7 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  const Layout = Component.Layout;
+  const Layout = Component.Layout || (() => <></>);
   return (
     <Layout>
       <Component {...pageProps} />
