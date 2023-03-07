@@ -4,10 +4,18 @@ import { HiPlay } from "react-icons/hi";
 import FeatureCard from "@/components/FeatureCard";
 import SectionTitle from "@/components/SectionTitle";
 import Link from "next/link";
-import ClientService from "@/services/client";
+import ClientService from "@/services/client.service";
 import Gallery from "@/components/elements/Gallery";
 import clsx from "clsx";
-import TeamMemberService from "@/services/teamMember";
+import TeamMemberService from "@/services/teamMember.service";
+import { steps } from "@/constants/home";
+import BlogService from "@/services/blog.service";
+import { Transition } from "@headlessui/react";
+import Slider from "@/components/elements/Slider";
+import { chunk } from "@/utils/array";
+import moment from "moment";
+import FaqService from "@/services/faq.service";
+import Accordion from "@/components/elements/Accordion";
 
 const Layout = ({ children }: any) => {
   return <MainLayout>{children}</MainLayout>;
@@ -18,6 +26,8 @@ const Home = (props: HomeProps) => {
   const [clients, setClients] = useState([]);
   const [trustedClients, setTrustedClients] = useState([]);
   const [teamMembers, setTeamMembers] = useState([]);
+  const [latestBlogArticles, setLatestBlogArticles] = useState<any[]>([]);
+  const [faqs, setFaqs] = useState([]);
 
   const getClients = async () => {
     const res = await ClientService.getClients();
@@ -31,29 +41,21 @@ const Home = (props: HomeProps) => {
     const res = await TeamMemberService.getTeamMembers();
     setTeamMembers(res.data.teamMembers);
   };
-
-  const steps = [
-    {
-      preview:
-        "http://10.0.0.106:3005/images/trusted-clients/1678012645558976804_253143548161901_1539196888_o.jpg",
-      title: "Draw your land on Google maps",
-    },
-    {
-      preview:
-        "http://10.0.0.106:3005/images/trusted-clients/167801269939610320955_400578120085109_958196530150646270_o.jpg",
-      title: "Enter land needs/ requirements",
-    },
-    {
-      preview:
-        "http://10.0.0.106:3005/images/clients/167776777736321427472_1050533955089519_8497251771878268430_o.jpg",
-      title: "Submit & receive your designs",
-    },
-  ];
+  const getLatestBlogArticles = async () => {
+    const res = await BlogService.getLatestBlogArticles();
+    setLatestBlogArticles(res.data.blogs);
+  };
+  const getFaqs = async () => {
+    const res = await FaqService.getFaqs(4);
+    setFaqs(res.data.commonQuestions);
+  };
 
   useEffect(() => {
     getClients();
     getTrustedClients();
     getTeamMembers();
+    getLatestBlogArticles();
+    getFaqs();
   }, []);
 
   return (
@@ -299,6 +301,45 @@ const Home = (props: HomeProps) => {
             <SectionTitle title="Read our blog"></SectionTitle>
             <Link href="/">See more</Link>
           </div>
+
+          <Slider options={chunk(latestBlogArticles, 2)}>
+            <div className="my-4">
+              {chunk(latestBlogArticles, 2).map((slide, idx) => (
+                <Slider.Slide key={idx} idx={idx}>
+                  <div className="slide grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {slide.map((article, idx) => (
+                      <div className="article" key={article.id}>
+                        <div className="bg-neutral-900 p-4">
+                          <img
+                            className="w-full h-64 object-cover"
+                            src={article.image}
+                            alt=""
+                          />
+                          <div className="flex justify-between">
+                            <p>{article.category}</p>
+                            <p>
+                              {moment(article.createdAt).format("DD MMMM YYYY")}
+                            </p>
+                          </div>
+                          <h2>{article.title}</h2>
+                          <p>{article.description}</p>
+                          <Link
+                            className="text-white underline"
+                            href={`articles/${article.slug}`}
+                          >
+                            See more
+                          </Link>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Slider.Slide>
+              ))}
+            </div>
+            <div className="flex justify-end">
+              <Slider.Controls />
+            </div>
+          </Slider>
         </div>
       </section>
 
@@ -331,6 +372,18 @@ const Home = (props: HomeProps) => {
       <section className="bg-black text-white" id="faqs">
         <div className="container mx-auto">
           <h2>Frequently asked questions (FAQs)</h2>
+
+          <div className="faqs flex flex-col gap-4 my-4">
+            {faqs.map((faq: any) => (
+              <Accordion title={faq.question} key={faq.id}>
+                <p>{faq.answer}</p>
+              </Accordion>
+            ))}
+          </div>
+
+          <Link className="text-white underline" href="/faqs">
+            See more
+          </Link>
         </div>
       </section>
     </div>
