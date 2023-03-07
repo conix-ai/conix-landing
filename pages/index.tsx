@@ -5,7 +5,7 @@ import FeatureCard from "@/components/FeatureCard";
 import SectionTitle from "@/components/SectionTitle";
 import Link from "next/link";
 import ClientService from "@/services/client";
-import Slider from "@/components/elements/Slider";
+import Gallery from "@/components/elements/Gallery";
 import clsx from "clsx";
 import TeamMemberService from "@/services/teamMember";
 
@@ -107,14 +107,14 @@ const Home = (props: HomeProps) => {
           <SectionTitle title="Works in easy steps" className="text-white" />
 
           <div className="py-4">
-            <Slider options={steps}>
+            <Gallery options={steps}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <Slider.Preview></Slider.Preview>
+                <Gallery.Preview></Gallery.Preview>
                 <div className="flex flex-col items-center md:items-end md:px-24">
-                  <Slider.Dots>
+                  <Gallery.Dots>
                     {steps.map((step, idx) => (
                       <>
-                        <Slider.Dot key={idx} idx={idx}>
+                        <Gallery.Dot key={idx} idx={idx}>
                           {(isActive: boolean) => (
                             <div
                               className={clsx(
@@ -128,24 +128,24 @@ const Home = (props: HomeProps) => {
                                   isActive ? "border-white" : "border-gray-600"
                                 )}
                               >
-                                <span className="m-auto">{idx}</span>
+                                <span className="m-auto">{idx + 1}</span>
                               </span>
                               <p>{step.title}</p>
                             </div>
                           )}
-                        </Slider.Dot>
+                        </Gallery.Dot>
                         {idx < steps.length - 1 && (
                           <span className="line block m-4 border-l h-12 border-gray-600"></span>
                         )}
                       </>
                     ))}
-                  </Slider.Dots>
+                  </Gallery.Dots>
                   <div className="my-8">
-                    <Slider.Controls />
+                    <Gallery.Controls />
                   </div>
                 </div>
               </div>
-            </Slider>
+            </Gallery>
           </div>
         </div>
       </section>
@@ -242,14 +242,14 @@ const Home = (props: HomeProps) => {
         <div className="container mx-auto">
           <SectionTitle title="Case Studies"></SectionTitle>
 
-          <Slider options={steps}>
+          <Gallery options={steps}>
             <div className="flex flex-col md:flex-row gap-4">
-              <Slider.Preview></Slider.Preview>
-              <Slider.Dots>
+              <Gallery.Preview></Gallery.Preview>
+              <Gallery.Dots>
                 <div className="flex flex-row md:flex-col gap-4">
                   {steps.map((step, idx) => (
                     <>
-                      <Slider.Dot key={idx} idx={idx}>
+                      <Gallery.Dot key={idx} idx={idx}>
                         {(isActive: boolean) => (
                           <div className="">
                             <img
@@ -262,13 +262,13 @@ const Home = (props: HomeProps) => {
                             />
                           </div>
                         )}
-                      </Slider.Dot>
+                      </Gallery.Dot>
                     </>
                   ))}
                 </div>
-              </Slider.Dots>
+              </Gallery.Dots>
             </div>
-          </Slider>
+          </Gallery>
 
           <h3>More case studies</h3>
         </div>

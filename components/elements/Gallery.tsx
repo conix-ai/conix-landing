@@ -3,19 +3,19 @@ import React, { createContext, useState } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 const initialContext: any = {};
-const SliderProvider = createContext(initialContext);
+const GalleryProvider = createContext(initialContext);
 
-const Slider = ({ options, children }: any) => {
+const Gallery = ({ options, children }: any) => {
   const [currentIdx, setCurrentIdx] = useState(0);
   return (
-    <SliderProvider.Provider value={{ options, currentIdx, setCurrentIdx }}>
+    <GalleryProvider.Provider value={{ options, currentIdx, setCurrentIdx }}>
       <div>{children}</div>
-    </SliderProvider.Provider>
+    </GalleryProvider.Provider>
   );
 };
 
 const Preview = () => {
-  const { options, currentIdx } = React.useContext(SliderProvider);
+  const { options, currentIdx } = React.useContext(GalleryProvider);
 
   return (
     <img
@@ -27,7 +27,7 @@ const Preview = () => {
 };
 
 const Dots = ({ children }: any) => {
-  const { options } = React.useContext(SliderProvider);
+  const { options } = React.useContext(GalleryProvider);
 
   return (
     <div className="dots">
@@ -42,7 +42,7 @@ const Dots = ({ children }: any) => {
   );
 };
 const Dot = ({ children, idx }: any) => {
-  const { currentIdx, setCurrentIdx } = React.useContext(SliderProvider);
+  const { currentIdx, setCurrentIdx } = React.useContext(GalleryProvider);
 
   const onClick = () => {
     setCurrentIdx(idx);
@@ -57,7 +57,7 @@ const Dot = ({ children, idx }: any) => {
 
 const Controls = () => {
   const { options, currentIdx, setCurrentIdx } =
-    React.useContext(SliderProvider);
+    React.useContext(GalleryProvider);
 
   const prevDisabled = currentIdx === 0;
   const nextDisabled = currentIdx >= options.length - 1;
@@ -89,8 +89,8 @@ const Controls = () => {
   );
 };
 
-Slider.Preview = Preview;
-Slider.Dots = Dots;
-Slider.Dot = Dot;
-Slider.Controls = Controls;
-export default Slider;
+Gallery.Preview = Preview;
+Gallery.Dots = Dots;
+Gallery.Dot = Dot;
+Gallery.Controls = Controls;
+export default Gallery;
