@@ -21,12 +21,9 @@ const Dropdown = ({ Trigger, options, children, onClick }: DropdownProps) => {
   return (
     <div className="dropdown">
       <Menu>
-        <Menu.Button
-          className="btn btn-sm bg-transparent"
-          // onClick={toggleMenuOpen}
-        >
+        <button className="btn btn-sm bg-transparent" onClick={toggleMenuOpen}>
           <Trigger />
-        </Menu.Button>
+        </button>
 
         <Transition
           show={isMenuOpen}
