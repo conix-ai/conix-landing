@@ -9,7 +9,7 @@
       @apply text-white bg-primary-500 hover:bg-primary-700;
     }
     &.btn-outline {
-      @apply bg-white border rounded-none bg-transparent hover:bg-black hover:bg-opacity-10;
+      @apply border rounded-none hover:bg-black hover:bg-opacity-10;
     }
   }
   .dropdown {

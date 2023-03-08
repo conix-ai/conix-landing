@@ -60,22 +60,24 @@ const Home = (props: HomeProps) => {
   return (
     <div className="page" id="home">
       {/* header */}
-      <header className="container mx-auto flex flex-col">
-        <div className="flex flex-col gap-12 justify-center my-auto">
-          <div className="content">
-            <h1 className="font-serif text-4xl lg:text-7xl xl:text-9xl capitalize">
-              The New <br /> Architecture era
-            </h1>
-            <p className="text-2xl">Reduce time & resources</p>
-          </div>
-          <div className="actions flex flex-wrap gap-4">
-            <button className="btn btn-primary">Start Now</button>
-            <button className="btn btn-outline">
-              <div className="flex items-center gap-2">
-                <HiPlay className="icon" />
-                <span>Watch Video</span>
-              </div>
-            </button>
+      <header className="flex flex-col">
+        <div className="container m-auto">
+          <div className="flex flex-col gap-12 justify-center my-auto">
+            <div className="content">
+              <h1 className="font-serif text-4xl lg:text-7xl xl:text-9xl capitalize">
+                The New <br /> Architecture era
+              </h1>
+              <p className="text-2xl">Reduce time & resources</p>
+            </div>
+            <div className="actions flex flex-wrap gap-4">
+              <button className="btn btn-primary">Start Now</button>
+              <button className="btn btn-outline bg-white">
+                <div className="flex items-center gap-2">
+                  <HiPlay className="icon" />
+                  <span>Watch Video</span>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -86,21 +88,21 @@ const Home = (props: HomeProps) => {
             <FeatureCard
               title={`+10 \n Various designs`}
               description="Provided with many options will reveal different potentials"
-              image=""
+              image="/assets/home/features/design.svg"
               color="bg-primary-600"
             ></FeatureCard>
             <FeatureCard
               title={`20X \n less time and effort`}
               description="There aren’t limits to creating designs, but tens of solutions
               in few hours."
-              image=""
+              image="/assets/home/features/time.svg"
               color="bg-primary-500"
             ></FeatureCard>
             <FeatureCard
               title={`50% \n Increase sales volume`}
               description="Saving human resources will help in selling more lands in no
               time."
-              image=""
+              image="/assets/home/features/sales.svg"
               color="bg-primary-400"
             ></FeatureCard>
           </div>
@@ -109,9 +111,11 @@ const Home = (props: HomeProps) => {
 
           <div className="py-4">
             <Gallery options={steps}>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <Gallery.Preview></Gallery.Preview>
-                <div className="flex flex-col items-center lg:items-end lg:px-24">
+              <div className="grid grid-cols-3 items-center gap-8">
+                <div className="col-span-3 lg:col-span-2">
+                  <Gallery.Preview />
+                </div>
+                <div className="col-span-3 lg:col-span-1 flex flex-col items-center lg:items-end lg:px-24">
                   <Gallery.Dots>
                     {steps.map((step, idx) => (
                       <>
@@ -151,17 +155,19 @@ const Home = (props: HomeProps) => {
         </div>
       </section>
       {/* key features */}
-      <section id="keyFeatures">
+      <section className="bg-opacity-40" id="keyFeatures">
         <div className="container mx-auto">
-          <div className="head flex items-center justify-between">
+          <div className="head flex flex-wrap items-center justify-between">
             <SectionTitle title="Key Features of CONIX" />
-            <Link href="/">see more</Link>
+            <Link href="/" className="text-black underline">
+              see more
+            </Link>
           </div>
 
-          <div className="feats grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="feat flex flex-col gap-4">
+          <div className="feats grid grid-cols-1 lg:grid-cols-3 gap-8 py-8">
+            <div className="feat flex flex-col items-center gap-4">
               <div className="icon">
-                <img src="" alt="" />
+                <img src="/assets/home/key-features/feat-1.svg" alt="" />
               </div>
               <p className="description text-center">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
@@ -169,9 +175,9 @@ const Home = (props: HomeProps) => {
                 nulla. Cras
               </p>
             </div>
-            <div className="feat flex flex-col gap-4">
+            <div className="feat flex flex-col items-center gap-4">
               <div className="icon">
-                <img src="" alt="" />
+                <img src="/assets/home/key-features/feat-2.svg" alt="" />
               </div>
               <p className="description text-center">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
@@ -179,9 +185,9 @@ const Home = (props: HomeProps) => {
                 nulla. Cras
               </p>
             </div>
-            <div className="feat flex flex-col gap-4">
+            <div className="feat flex flex-col items-center gap-4">
               <div className="icon">
-                <img src="" alt="" />
+                <img src="/assets/home/key-features/feat-3.svg" alt="" />
               </div>
               <p className="description text-center">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
@@ -194,8 +200,12 @@ const Home = (props: HomeProps) => {
       </section>
       <section className="bg-black text-white" id="certified">
         <div className="container mx-auto">
-          <div className="flex items-center gap-12">
-            <img className="w-24 h-24 bg-primary rounded-full" src="" alt="" />
+          <div className="flex flex-col lg:flex-row justify-center items-center gap-12">
+            <img
+              className="w-48 h-48 rounded-full"
+              src="/assets/home/certified/certified.png"
+              alt=""
+            />
             <h1 className="font-normal">
               CONIX is certified according to Saudi building code, which means
               ready to build & hustle free designs.
@@ -213,7 +223,7 @@ const Home = (props: HomeProps) => {
       <section className="bg-primary text-white" id="clients">
         <div className="container mx-auto">
           <div className="flex flex-col gap-4">
-            <div className="flex items-center gap-12">
+            <div className="flex flex-col lg:flex-row items-center gap-12">
               <h3>Trusted by</h3>
               {trustedClients.map((client: any) => (
                 <img
@@ -224,7 +234,7 @@ const Home = (props: HomeProps) => {
                 />
               ))}
             </div>
-            <div className="flex items-center gap-12">
+            <div className="flex flex-col lg:flex-row items-center gap-12">
               <h3>Our clients</h3>
               {clients.map((client: any) => (
                 <img
@@ -244,30 +254,34 @@ const Home = (props: HomeProps) => {
           <SectionTitle title="Case Studies"></SectionTitle>
 
           <Gallery options={steps}>
-            <div className="flex flex-col lg:flex-row gap-4">
-              <Gallery.Preview></Gallery.Preview>
-              <Gallery.Dots>
-                <div className="flex flex-row lg:flex-col gap-4">
-                  {steps.map((step, idx) => (
-                    <>
-                      <Gallery.Dot key={idx} idx={idx}>
-                        {(isActive: boolean) => (
-                          <div className="">
-                            <img
-                              className={clsx(
-                                "w-36 h-20 object-cover p-1",
-                                isActive ? "opacity-100 border" : "opacity-50"
-                              )}
-                              src={step.preview}
-                              alt=""
-                            />
-                          </div>
-                        )}
-                      </Gallery.Dot>
-                    </>
-                  ))}
-                </div>
-              </Gallery.Dots>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="col-span-3 lg:col-span-2">
+                <Gallery.Preview></Gallery.Preview>
+              </div>
+              <div className="col-span-3 lg:col-span-1">
+                <Gallery.Dots>
+                  <div className="flex flex-row lg:flex-col gap-4">
+                    {steps.map((step, idx) => (
+                      <>
+                        <Gallery.Dot key={idx} idx={idx}>
+                          {(isActive: boolean) => (
+                            <div className="">
+                              <img
+                                className={clsx(
+                                  "w-36 h-20 object-cover p-1",
+                                  isActive ? "opacity-100 border" : "opacity-50"
+                                )}
+                                src={step.preview}
+                                alt=""
+                              />
+                            </div>
+                          )}
+                        </Gallery.Dot>
+                      </>
+                    ))}
+                  </div>
+                </Gallery.Dots>
+              </div>
             </div>
           </Gallery>
 
@@ -286,7 +300,7 @@ const Home = (props: HomeProps) => {
       {/* events */}
       <section id="upcomingEvents">
         <div className="container mx-auto">
-          <div className="head flex justify-between">
+          <div className="head flex flex-wrap items-center justify-between">
             <SectionTitle title="Upcoming Events"></SectionTitle>
             <Link href="/">See more</Link>
           </div>
@@ -296,7 +310,7 @@ const Home = (props: HomeProps) => {
       {/* blog */}
       <section className="bg-black text-white py-12" id="blog">
         <div className="container mx-auto">
-          <div className="head flex justify-between">
+          <div className="head flex flex-wrap items-center justify-between">
             <SectionTitle title="Read our blog"></SectionTitle>
             <Link href="/">See more</Link>
           </div>
@@ -350,7 +364,7 @@ const Home = (props: HomeProps) => {
             <Link href="/">See more</Link>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 my-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 my-4">
             {teamMembers.map((member: any) => (
               <div className="flex flex-col items-center gap-2" key={member.id}>
                 <img

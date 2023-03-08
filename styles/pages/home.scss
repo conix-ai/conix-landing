@@ -1,0 +1,11 @@
+.page#home {
+  header {
+    background: url("/assets/hero-cover.png");
+    background-position: right;
+    background-repeat: no-repeat;
+  }
+  section#keyFeatures {
+    background: url("/assets/home/key-features/key-features-cover.png");
+    background-size: cover;
+  }
+}

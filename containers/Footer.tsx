@@ -42,7 +42,9 @@ const Footer = (props: FooterProps) => {
                   name="email"
                   placeholder="Email address"
                 ></Field>
-                <button className="btn btn-outline">Subscribe</button>
+                <button className="btn btn-outline bg-transparent">
+                  Subscribe
+                </button>
               </div>
             </div>
           </div>
@@ -124,12 +126,20 @@ const Footer = (props: FooterProps) => {
         <div className="foot bg-primary p-4">
           <div className="container mx-auto">
             <div className="flex flex-wrap justify-between items-center">
-              <div className="socials flex gap-12">
-                <div className="icon">yt</div>
-                <div className="icon">ig</div>
-                <div className="icon">fb</div>
+              <div className="socials flex gap-4 lg:gap-12">
+                <div className="icon">
+                  <img src="/assets/icons/youtube.svg" alt="" />
+                </div>
+                <div className="icon">
+                  <img src="/assets/icons/instagram.svg" alt="" />
+                </div>
+                <div className="icon">
+                  <img src="/assets/icons/facebook.svg" alt="" />
+                </div>
               </div>
-              <div className="logo">logo</div>
+              <div className="logo">
+                <img src="/assets/logo-white.svg" alt="" />
+              </div>
             </div>
           </div>
         </div>

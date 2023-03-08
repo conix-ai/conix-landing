@@ -18,12 +18,8 @@ const Preview = ({ children }: any) => {
   const { options, currentIdx } = React.useContext(GalleryProvider);
 
   return (
-    children(currentIdx) || (
-      <img
-        className="w-full h-72 object-cover object-center"
-        src={options[currentIdx].preview}
-        alt=""
-      />
+    (children && children(currentIdx)) || (
+      <img className="" src={options[currentIdx].preview} alt="" />
     )
   );
 };

@@ -38,7 +38,10 @@ const NavbarItem = ({ name, link, isChild, options }: NavbarItemProps) => {
   return (
     <>
       {!options && (
-        <Link className="flex p-4 text-start text-white" href={link}>
+        <Link
+          className="flex p-4 text-start text-white font-bold hover:no-underline"
+          href={link}
+        >
           {/* item */}
           <div className="flex gap-2 items-center justify-between">
             <p>{name}</p>
@@ -69,7 +72,11 @@ const Navbar = (props: NavbarProps) => {
     <div className="navbar bg-black text-white sticky top-0 z-10">
       <div className="container mx-auto">
         <div className="flex gap-12 justify-between items-center p-4 relative">
-          <div className="logo">logo</div>
+          <Link href="/">
+            <div className="logo">
+              <img src="/assets/logo.svg" alt="" />
+            </div>
+          </Link>
 
           <div
             className="toggle justify-end flex lg:hidden"
