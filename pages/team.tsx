@@ -29,17 +29,20 @@ const Team = (props: TeamProps) => {
 
   return (
     <div className="page" id="team">
-      <header className="container mx-auto flex flex-col items-start gap-4 mt-24">
-        <h1 className="text-4xl lg:text-8xl font-serif">Meet our team</h1>
-        <p className="text-2xl max-w-lg">
-          Lorem ipsum dolorsitamet,consectetur adipiscing elit. Ut sapien
-          ligula, pretium eget massaegestas, malesuada conv allis nulla.
-        </p>
-        <button className="btn btn-primary px-24 py-4 mt-16">
-          Be part of our family
-        </button>
+      <header className="flex flex-col">
+        <div className="container m-auto">
+          <h1 className="text-4xl lg:text-8xl font-serif">Meet our team</h1>
+          <p className="text-2xl max-w-lg">
+            Lorem ipsum dolorsitamet,consectetur adipiscing elit. Ut sapien
+            ligula, pretium eget massaegestas, malesuada conv allis nulla.
+          </p>
+          <button className="btn btn-primary px-24 py-4 mt-16">
+            Be part of our family
+          </button>
+        </div>
       </header>
 
+      {/* leader */}
       <section className="bg-black text-white py-12" id="leader">
         <div className="container mx-auto">
           <SectionTitle className="text-4xl" title="The leadership team" />
@@ -47,11 +50,15 @@ const Team = (props: TeamProps) => {
           <div className="flex flex-col gap-8 my-8">
             {teamLeaders.map((leader: any) => (
               <div className="card bg-neutral-900 p-8" key={leader.id}>
-                <div className="grid grid-cols-5 items-center gap-48">
-                  <div className="col-span-2">
-                    <img className="w-full h-72" src={leader.image} alt="" />
+                <div className="grid grid-cols-5 items-center gap-4 lg:gap-48">
+                  <div className="col-span-5 lg:col-span-2">
+                    <img
+                      className="w-full h-72 object-cover"
+                      src={leader.image}
+                      alt=""
+                    />
                   </div>
-                  <div className="col-span-3 info">
+                  <div className="col-span-5 lg:col-span-3 info">
                     <h2>{leader.name}</h2>
                     <p className="text-neutral-600">{leader.title}</p>
                     <p>{leader.brief}</p>
@@ -63,6 +70,7 @@ const Team = (props: TeamProps) => {
         </div>
       </section>
 
+      {/* team */}
       <section id="team">
         <div className="container mx-auto">
           <div className="head flex justify-between">
