@@ -72,7 +72,7 @@ const Navbar = (props: NavbarProps) => {
           <div className="logo">logo</div>
 
           <div
-            className="toggle justify-end flex md:hidden"
+            className="toggle justify-end flex lg:hidden"
             onClick={toggleMenu}
           >
             <HiMenuAlt4 className="icon" />
@@ -81,36 +81,36 @@ const Navbar = (props: NavbarProps) => {
           <div
             className={clsx(
               "absolute top-14 left-0 w-full bg-black max-h-[90vh] overflow-auto",
-              "md:static md:max-h-none md:overflow-visible",
-              !showMenu ? "hidden md:block" : ""
+              "lg:static lg:max-h-none lg:overflow-visible",
+              !showMenu ? "hidden lg:block" : ""
             )}
           >
             <div className="container mx-auto">
-              <div className="flex flex-col items-start gap-2 md:flex md:flex-row md:items-center md:justify-between">
-                <div className="navbar flex flex-col md:flex-row md:items-center gap-2 md:gap-12 w-full md:w-auto">
+              <div className="flex flex-col items-start gap-2 lg:flex lg:flex-row lg:items-center lg:justify-between">
+                <div className="navbar flex flex-col lg:flex-row lg:items-center gap-2 lg:gap-12 w-full lg:w-auto">
                   <NavbarItem
                     name="Company"
                     link="#"
                     options={[
                       {
                         name: "Our Team",
-                        link: "/resources",
+                        link: "/team",
                       },
                       {
                         name: "Our Story",
-                        link: "https://portal.innocalls.com/",
+                        link: "/story",
                       },
                       {
                         name: "Contact US",
-                        link: "/faqs",
+                        link: "/contact",
                       },
                       {
                         name: "Events",
-                        link: "/faqs",
+                        link: "/events",
                       },
                       {
                         name: "Careers",
-                        link: "/faqs",
+                        link: "/careers",
                       },
                     ]}
                   ></NavbarItem>
@@ -120,11 +120,11 @@ const Navbar = (props: NavbarProps) => {
                     options={[
                       {
                         name: "for architects",
-                        link: "/resources",
+                        link: "/for-architects",
                       },
                       {
                         name: "for real estate developers",
-                        link: "https://portal.innocalls.com/",
+                        link: "/for-real-estate-developers",
                       },
                       {
                         name: "FAQ",
@@ -132,7 +132,7 @@ const Navbar = (props: NavbarProps) => {
                       },
                       {
                         name: "Features",
-                        link: "/faqs",
+                        link: "/features",
                       },
                     ]}
                   ></NavbarItem>

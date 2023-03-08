@@ -14,15 +14,17 @@ const Gallery = ({ options, children }: any) => {
   );
 };
 
-const Preview = () => {
+const Preview = ({ children }: any) => {
   const { options, currentIdx } = React.useContext(GalleryProvider);
 
   return (
-    <img
-      className="w-full h-72 object-cover object-center"
-      src={options[currentIdx].preview}
-      alt=""
-    />
+    children(currentIdx) || (
+      <img
+        className="w-full h-72 object-cover object-center"
+        src={options[currentIdx].preview}
+        alt=""
+      />
+    )
   );
 };
 
@@ -34,7 +36,9 @@ const Dots = ({ children }: any) => {
       {children || (
         <>
           {options.map((img: any, idx: number) => (
-            <Dot key={idx} idx={idx}></Dot>
+            <Dot key={idx} idx={idx}>
+              {() => <>{idx}</>}
+            </Dot>
           ))}
         </>
       )}
@@ -49,7 +53,7 @@ const Dot = ({ children, idx }: any) => {
   };
 
   return (
-    <div onClick={onClick}>
+    <div onClick={onClick} role="button">
       {children && children(currentIdx === idx, currentIdx)}
     </div>
   );

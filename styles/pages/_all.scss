@@ -1,1 +1,7 @@
+.page {
+  header {
+    height: calc(100vh - 100px);
+  }
+}
+
 @import "./home.scss";

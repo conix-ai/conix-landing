@@ -13,7 +13,7 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  const Layout = Component.Layout || (() => <></>);
+  const Layout = Component.Layout || (({ children }) => <>{children}</>);
   return (
     <Layout>
       <Component {...pageProps} />

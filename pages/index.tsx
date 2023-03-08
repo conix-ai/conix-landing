@@ -10,7 +10,6 @@ import clsx from "clsx";
 import TeamMemberService from "@/services/teamMember.service";
 import { steps } from "@/constants/home";
 import BlogService from "@/services/blog.service";
-import { Transition } from "@headlessui/react";
 import Slider from "@/components/elements/Slider";
 import { chunk } from "@/utils/array";
 import moment from "moment";
@@ -64,7 +63,7 @@ const Home = (props: HomeProps) => {
       <header className="container mx-auto flex flex-col">
         <div className="flex flex-col gap-12 justify-center my-auto">
           <div className="content">
-            <h1 className="font-serif text-4xl md:text-7xl xl:text-9xl capitalize">
+            <h1 className="font-serif text-4xl lg:text-7xl xl:text-9xl capitalize">
               The New <br /> Architecture era
             </h1>
             <p className="text-2xl">Reduce time & resources</p>
@@ -83,7 +82,7 @@ const Home = (props: HomeProps) => {
       {/* features */}
       <section className="bg-black text-white" id="features">
         <div className="container mx-auto">
-          <div className="feats grid grid-cols-1 md:grid-cols-3 relative -top-24 z-0">
+          <div className="feats grid grid-cols-1 lg:grid-cols-3 relative -top-24 z-0">
             <FeatureCard
               title={`+10 \n Various designs`}
               description="Provided with many options will reveal different potentials"
@@ -110,9 +109,9 @@ const Home = (props: HomeProps) => {
 
           <div className="py-4">
             <Gallery options={steps}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <Gallery.Preview></Gallery.Preview>
-                <div className="flex flex-col items-center md:items-end md:px-24">
+                <div className="flex flex-col items-center lg:items-end lg:px-24">
                   <Gallery.Dots>
                     {steps.map((step, idx) => (
                       <>
@@ -159,7 +158,7 @@ const Home = (props: HomeProps) => {
             <Link href="/">see more</Link>
           </div>
 
-          <div className="feats grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="feats grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="feat flex flex-col gap-4">
               <div className="icon">
                 <img src="" alt="" />
@@ -245,10 +244,10 @@ const Home = (props: HomeProps) => {
           <SectionTitle title="Case Studies"></SectionTitle>
 
           <Gallery options={steps}>
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col lg:flex-row gap-4">
               <Gallery.Preview></Gallery.Preview>
               <Gallery.Dots>
-                <div className="flex flex-row md:flex-col gap-4">
+                <div className="flex flex-row lg:flex-col gap-4">
                   {steps.map((step, idx) => (
                     <>
                       <Gallery.Dot key={idx} idx={idx}>
@@ -306,7 +305,7 @@ const Home = (props: HomeProps) => {
             <div className="my-4">
               {chunk(latestBlogArticles, 2).map((slide, idx) => (
                 <Slider.Slide key={idx} idx={idx}>
-                  <div className="slide grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="slide grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {slide.map((article, idx) => (
                       <div className="article" key={article.id}>
                         <div className="bg-neutral-900 p-4">
@@ -351,7 +350,7 @@ const Home = (props: HomeProps) => {
             <Link href="/">See more</Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 my-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 my-4">
             {teamMembers.map((member: any) => (
               <div className="flex flex-col items-center gap-2" key={member.id}>
                 <img

@@ -10,7 +10,7 @@ const Footer = (props: FooterProps) => {
         <div className="bg-primary h-40"></div>
         <div className="container mx-auto">
           <div className="-mt-28">
-            <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
               <div className="">
                 <h1 className="mb-16 font-serif text-4xl">
                   Reduce the hustle & <br /> Save time
@@ -30,7 +30,7 @@ const Footer = (props: FooterProps) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 items-center py-12 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-center py-12 gap-8">
             <p className="text-2xl tracking-wider font-mono">
               Be continuously updated with architecture and AI trends
             </p>
@@ -47,7 +47,7 @@ const Footer = (props: FooterProps) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-5 gap-4 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-5 gap-4 py-12">
             <div className="col">
               <h2>Our offices</h2>
               <div className="flex flex-col gap-2">
