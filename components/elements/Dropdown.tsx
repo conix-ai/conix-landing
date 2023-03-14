@@ -29,7 +29,7 @@ const Dropdown = ({ Trigger, options, children, onClick }: DropdownProps) => {
         <button
           className="btn btn-sm bg-transparent"
           onClick={onTriggerClick}
-          onBlur={onTriggerBlur}
+          // onBlur={onTriggerBlur}
         >
           <Trigger isOpen={isMenuOpen} />
         </button>

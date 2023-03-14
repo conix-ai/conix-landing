@@ -228,7 +228,7 @@ const Home = (props: HomeProps) => {
               {trustedClients.map((client: any) => (
                 <img
                   key={client.id}
-                  className="bg-black w-48 h-12 object-cover"
+                  className="w-48 h-12 object-cover"
                   src={client.logo}
                   alt=""
                 />
@@ -239,7 +239,7 @@ const Home = (props: HomeProps) => {
               {clients.map((client: any) => (
                 <img
                   key={client.id}
-                  className="bg-black w-48 h-12 object-cover"
+                  className="w-48 h-12 object-cover"
                   src={client.logo}
                   alt=""
                 />
