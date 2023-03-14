@@ -1,6 +1,6 @@
 import MainLayout from "@/layouts/MainLayout";
 import React, { useEffect, useState } from "react";
-import { HiPlay } from "react-icons/hi";
+import { HiChevronRight, HiPlay } from "react-icons/hi";
 import FeatureCard from "@/components/FeatureCard";
 import SectionTitle from "@/components/SectionTitle";
 import Link from "next/link";
@@ -15,6 +15,10 @@ import { chunk } from "@/utils/array";
 import moment from "moment";
 import FaqService from "@/services/faq.service";
 import Accordion from "@/components/elements/Accordion";
+import Carousel from "react-slick";
+import TestimonialService from "@/services/testimonial.service";
+import EventService from "@/services/event.service";
+import CaseStudyService from "@/services/caseStudy.service";
 
 const Layout = ({ children }: any) => {
   return <MainLayout>{children}</MainLayout>;
@@ -27,6 +31,9 @@ const Home = (props: HomeProps) => {
   const [teamMembers, setTeamMembers] = useState([]);
   const [latestBlogArticles, setLatestBlogArticles] = useState<any[]>([]);
   const [faqs, setFaqs] = useState([]);
+  const [testimonials, setTestimonials] = useState<any[]>([]);
+  const [upcomingEvents, setUpcomingEvents] = useState<any[]>([]);
+  const [caseStudies, setCaseStudies] = useState<any[]>([]);
 
   const getClients = async () => {
     const res = await ClientService.getClients();
@@ -48,6 +55,18 @@ const Home = (props: HomeProps) => {
     const res = await FaqService.getFaqs(4);
     setFaqs(res.data.commonQuestions);
   };
+  const getTestimonials = async () => {
+    const res = await TestimonialService.getTestimonial();
+    setTestimonials(res.data.testimonials);
+  };
+  const getUpcomingEvents = async () => {
+    const res = await EventService.getUpcomingEvents(4);
+    setUpcomingEvents(res.data.events);
+  };
+  const getCaseStudies = async () => {
+    const res = await CaseStudyService.getCaseStudies(4);
+    setCaseStudies(res.data.caseStudies);
+  };
 
   useEffect(() => {
     getClients();
@@ -55,6 +74,9 @@ const Home = (props: HomeProps) => {
     getTeamMembers();
     getLatestBlogArticles();
     getFaqs();
+    getTestimonials();
+    getUpcomingEvents();
+    getCaseStudies();
   }, []);
 
   return (
@@ -115,7 +137,7 @@ const Home = (props: HomeProps) => {
                 <div className="col-span-3 lg:col-span-2">
                   <Gallery.Preview />
                 </div>
-                <div className="col-span-3 lg:col-span-1 flex flex-col items-center lg:items-end lg:px-24">
+                <div className="col-span-3 lg:col-span-1 flex flex-col items-center lg:items-end">
                   <Gallery.Dots>
                     {steps.map((step, idx) => (
                       <>
@@ -217,6 +239,43 @@ const Home = (props: HomeProps) => {
       <section id="testimonials">
         <div className="container mx-auto">
           <SectionTitle title="People are talking" />
+
+          <Carousel
+            dots
+            infinite
+            speed={500}
+            slidesToShow={1}
+            slidesToScroll={1}
+            centerMode={true}
+            adaptiveHeight
+            responsive={[
+              {
+                breakpoint: 1000,
+                settings: {
+                  centerMode: false,
+                },
+              },
+            ]}
+          >
+            {testimonials.map((testimonial) => (
+              <div className="p-8" key={testimonial.id}>
+                <div className="flex flex-col-reverse lg:flex-row items-center gap-4 lg:gap-24 bg-gray-100 shadow-lg p-1 lg:p-12">
+                  <div className="flex-1 flex flex-col gap-4 items-center text-center">
+                    <p>{testimonial.commendation}</p>
+                    <div className="flex flex-col items-center gap-2">
+                      <h4>{testimonial.clientName}</h4>
+                      <p>{testimonial.clientTitle}</p>
+                    </div>
+                  </div>
+                  <img
+                    className="w-48 h-48 object-cover rounded-full"
+                    src={testimonial.clientImage}
+                    alt=""
+                  />
+                </div>
+              </div>
+            ))}
+          </Carousel>
         </div>
       </section>
       {/* clients */}
@@ -253,39 +312,130 @@ const Home = (props: HomeProps) => {
         <div className="container mx-auto">
           <SectionTitle title="Case Studies"></SectionTitle>
 
-          <Gallery options={steps}>
-            <div className="grid grid-cols-3 gap-4">
-              <div className="col-span-3 lg:col-span-2">
-                <Gallery.Preview></Gallery.Preview>
+          <Gallery options={caseStudies[0]?.gallery}>
+            <div className="flex flex-col lg:flex-row gap-4">
+              <div className="flex-1">
+                <Gallery.Preview>
+                  {(idx: number) => (
+                    <img
+                      className="w-full lg:max-h-[500px] object-contain"
+                      src={caseStudies[0]?.gallery[idx]}
+                      alt=""
+                    />
+                  )}
+                </Gallery.Preview>
               </div>
-              <div className="col-span-3 lg:col-span-1">
+              <div className="">
                 <Gallery.Dots>
                   <div className="flex flex-row lg:flex-col gap-4">
-                    {steps.map((step, idx) => (
-                      <>
-                        <Gallery.Dot key={idx} idx={idx}>
-                          {(isActive: boolean) => (
-                            <div className="">
-                              <img
-                                className={clsx(
-                                  "w-36 h-20 object-cover p-1",
-                                  isActive ? "opacity-100 border" : "opacity-50"
-                                )}
-                                src={step.preview}
-                                alt=""
-                              />
-                            </div>
-                          )}
-                        </Gallery.Dot>
-                      </>
-                    ))}
+                    {caseStudies[0]?.gallery.map(
+                      (image: string, idx: number) => (
+                        <>
+                          <Gallery.Dot key={idx} idx={idx}>
+                            {(isActive: boolean) => (
+                              <div className="">
+                                <img
+                                  className={clsx(
+                                    "w-36 h-20 object-cover p-1",
+                                    isActive
+                                      ? "opacity-100 border"
+                                      : "opacity-50"
+                                  )}
+                                  src={image}
+                                  alt=""
+                                />
+                              </div>
+                            )}
+                          </Gallery.Dot>
+                        </>
+                      )
+                    )}
                   </div>
                 </Gallery.Dots>
               </div>
             </div>
           </Gallery>
 
-          <h3>More case studies</h3>
+          <div className="content">
+            <h1>{caseStudies[0]?.title}</h1>
+
+            <div className="grid grid-cols-3 items-center gap-8 py-4">
+              <div className="props col-span-3 lg:col-span-1 flex flex-col gap-2">
+                <p className="prop text-white">
+                  <span className="text-neutral-600">Date: </span>
+                  <span>
+                    {moment(caseStudies[0]?.createdAt).format("DD MMMM YYYY")}
+                  </span>
+                </p>
+                <p className="prop text-white">
+                  <span className="text-neutral-600">Project: </span>
+                  <span>{caseStudies[0]?.type}</span>
+                </p>
+                <p className="prop text-white">
+                  <span className="text-neutral-600">Location: </span>
+                  <span>{caseStudies[0]?.location}</span>
+                </p>
+              </div>
+              <div className="col-span-3 lg:col-span-2">
+                <p className="description text-lg">
+                  {caseStudies[0]?.description}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="more">
+            <div className="head flex justify-between items-center">
+              <SectionTitle title="More case studies" />
+              <Link href="/case-studies" className="text-white underline">
+                See more
+              </Link>
+            </div>
+
+            <Slider options={chunk(caseStudies.slice(1), 2)}>
+              <div className="my-4">
+                {chunk(caseStudies.slice(1), 2).map((slide, idx) => (
+                  <Slider.Slide key={idx} idx={idx}>
+                    <div className="slide grid grid-cols-1 lg:grid-cols-2 gap-4">
+                      {slide.map((caseStudy, idx) => (
+                        <div
+                          className="card bg-neutral-900 p-4 grid grid-cols-1 lg:grid-cols-2 gap-8"
+                          key={caseStudy.id}
+                        >
+                          <img
+                            className="h-full object-cover"
+                            src={caseStudy.image}
+                            alt=""
+                          />
+                          <div className="content">
+                            <h1>{caseStudy.title}</h1>
+                            <p className="text-neutral-500">
+                              {moment(caseStudy.createdAt).format(
+                                "DD MMMM YYYY"
+                              )}
+                            </p>
+                            <p className="line-clamp-5">
+                              {caseStudy.description}
+                            </p>
+
+                            <Link
+                              className="block mt-8 text-white underline"
+                              href={`caseStudies/${caseStudy.id}`}
+                            >
+                              See More
+                            </Link>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </Slider.Slide>
+                ))}
+              </div>
+              <div className="flex justify-end">
+                <Slider.Controls />
+              </div>
+            </Slider>
+          </div>
         </div>
       </section>
       {/* sample */}
@@ -304,6 +454,33 @@ const Home = (props: HomeProps) => {
             <SectionTitle title="Upcoming Events"></SectionTitle>
             <Link href="/">See more</Link>
           </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {upcomingEvents.map((event) => (
+              <div
+                className="card bg-gray-50 p-4 border flex flex-col gap-2"
+                key={event.id}
+              >
+                <img src={event.image} alt="" />
+                <div className="sub flex flex-wrap justify-between">
+                  <p className="text-neutral-500">{event.type}</p>
+                  <p className="text-neutral-500">
+                    {moment(event.createdAt).format("DD MMMM YYYY")}
+                  </p>
+                </div>
+                <h1>{event.title}</h1>
+                <p>{event.description}</p>
+                <div className="mt-8">
+                  <Link
+                    className="text-black flex flex-wrap items-center gap-8"
+                    href={`/events/${event.id}`}
+                  >
+                    <span>Register</span>
+                    <HiChevronRight />
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -321,27 +498,38 @@ const Home = (props: HomeProps) => {
                 <Slider.Slide key={idx} idx={idx}>
                   <div className="slide grid grid-cols-1 lg:grid-cols-2 gap-4">
                     {slide.map((article, idx) => (
-                      <div className="article" key={article.id}>
-                        <div className="bg-neutral-900 p-4">
+                      <div
+                        className="article bg-neutral-900 flex flex-col gap-4"
+                        key={article.id}
+                      >
+                        <div className="p-4">
                           <img
                             className="w-full h-64 object-cover"
                             src={article.image}
                             alt=""
                           />
-                          <div className="flex justify-between">
-                            <p>{article.category}</p>
-                            <p>
-                              {moment(article.createdAt).format("DD MMMM YYYY")}
+                          <div className="content py-2">
+                            <div className="flex justify-between">
+                              <p className="text-neutral-500">
+                                {article.category}
+                              </p>
+                              <p className="text-neutral-500">
+                                {moment(article.createdAt).format(
+                                  "DD MMMM YYYY"
+                                )}
+                              </p>
+                            </div>
+                            <h2 className="line-clamp-2">{article.title}</h2>
+                            <p className="line-clamp-3">
+                              {article.description}
                             </p>
+                            <Link
+                              className="text-white underline"
+                              href={`articles/${article.slug}`}
+                            >
+                              See more
+                            </Link>
                           </div>
-                          <h2>{article.title}</h2>
-                          <p>{article.description}</p>
-                          <Link
-                            className="text-white underline"
-                            href={`articles/${article.slug}`}
-                          >
-                            See more
-                          </Link>
                         </div>
                       </div>
                     ))}
@@ -361,7 +549,7 @@ const Home = (props: HomeProps) => {
         <div className="container mx-auto">
           <div className="head flex justify-between">
             <SectionTitle title="our team"></SectionTitle>
-            <Link href="/">See more</Link>
+            <Link href="/team">See more</Link>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 my-4">
@@ -372,9 +560,9 @@ const Home = (props: HomeProps) => {
                   src={member.image}
                   alt=""
                 />
-                <p>{member.name}</p>
-                <h5>{member.title}</h5>
-                <p>{member.brief}</p>
+                <p className="text-2xl">{member.name}</p>
+                <p className="text-neutral-600">{member.title}</p>
+                <p className="text-lg text-center">{member.brief}</p>
               </div>
             ))}
           </div>

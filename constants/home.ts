@@ -12,3 +12,21 @@ export const steps = [
     title: "Submit & receive your designs",
   },
 ];
+
+export const caseStudies = [
+  {
+    preview: "/assets/home/case-studies/study-1.png",
+  },
+  {
+    preview: "/assets/home/case-studies/study-2.jpg",
+  },
+  {
+    preview: "/assets/home/case-studies/study-3.jpg",
+  },
+  {
+    preview: "/assets/home/case-studies/study-4.jpg",
+  },
+  {
+    preview: "/assets/home/case-studies/study-5.png",
+  },
+];

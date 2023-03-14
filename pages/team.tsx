@@ -77,7 +77,7 @@ const Team = (props: TeamProps) => {
             <SectionTitle title="The Dream Team"></SectionTitle>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 my-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-4 my-4">
             {teamMembers.map((member: any) => (
               <div className="flex flex-col items-center gap-2" key={member.id}>
                 <img
@@ -87,7 +87,7 @@ const Team = (props: TeamProps) => {
                 />
                 <p className="text-2xl">{member.name}</p>
                 <p className="text-neutral-600">{member.title}</p>
-                <p className="text-lg">{member.brief}</p>
+                <p className="text-lg text-center">{member.brief}</p>
               </div>
             ))}
           </div>

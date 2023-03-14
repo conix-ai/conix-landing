@@ -5,7 +5,7 @@ const nextConfig = {
     return [
       {
         source: "/:path*",
-        destination: "http://161.35.73.210/:path*", // replace with your API endpoint
+        destination: process.env.NEXT_PUBLIC_API_HOST + "/:path*", // replace with your API endpoint
       },
     ];
   },
