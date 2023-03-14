@@ -1,8 +1,10 @@
 .page {
-  header {
+  header:not([class*="h-"]) {
     height: calc(100vh - 100px);
   }
 }
 
 @import "./home.scss";
 @import "./team.scss";
+@import "./story.scss";
+@import "./contact.scss";

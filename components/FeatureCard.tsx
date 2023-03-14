@@ -15,7 +15,7 @@ const FeatureCard = ({
 }: FeatureCardProps) => {
   return (
     <div className={clsx("text-center", color)}>
-      <div className="p-8 flex flex-col gap-4 items-center">
+      <div className="px-8 py-12 flex flex-col gap-4 items-center">
         <img src={image} alt="" />
         <h2 className="whitespace-pre-wrap">{title}</h2>
         <p className="whitespace-pre-wrap">{description}</p>

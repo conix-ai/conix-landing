@@ -6,8 +6,14 @@ const BlogService = (() => {
     return latestBlogArticles.data;
   };
 
+  const getArticle = async (slug: string) => {
+    const article = await api.get(`blog/${slug}`);
+    return article.data;
+  };
+
   return {
     getLatestBlogArticles,
+    getArticle,
   };
 })();
 

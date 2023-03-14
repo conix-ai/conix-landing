@@ -1,10 +1,20 @@
 import clsx from "clsx";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import Dropdown from "./elements/Dropdown";
 import { HiChevronDown, HiChevronUp, HiMenuAlt4 } from "react-icons/hi";
 
-type TriggerProps = {
+export type NavbarProps = {};
+const initialContext: NavbarProps = {};
+const NavbarProvider = createContext(initialContext);
+
+export const Navbar = ({ children }: any) => {
+  return (
+    <NavbarProvider.Provider value={{}}>{children}</NavbarProvider.Provider>
+  );
+};
+
+export type TriggerProps = {
   name: string;
   isOpen: boolean;
 };
@@ -22,19 +32,9 @@ const Trigger = ({ name, isOpen }: TriggerProps) => {
 export type NavbarItemProps = {
   name: string;
   link: string;
-  isChild?: boolean;
   options?: NavbarItemProps[];
 };
-const NavbarItem = ({ name, link, isChild, options }: NavbarItemProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const onClick = (event: any) => {
-    if (options) {
-      event.preventDefault();
-      setIsOpen(!isOpen);
-    }
-  };
-
+const NavbarItem = ({ name, link, options }: NavbarItemProps) => {
   return (
     <>
       {!options && (
@@ -50,19 +50,21 @@ const NavbarItem = ({ name, link, isChild, options }: NavbarItemProps) => {
       )}
       {options && (
         <Dropdown
-          Trigger={() => <Trigger name={name} isOpen={isOpen} />}
-          onClick={onClick}
+          Trigger={(props: any) => <Trigger {...props} name={name} />}
           options={options}
         >
-          {(option: NavbarItemProps) => <NavbarItem {...option} isChild />}
+          {(option: NavbarItemProps, isOpen) => <NavbarItem {...option} />}
         </Dropdown>
       )}
     </>
   );
 };
 
-export type NavbarProps = {};
-const Navbar = (props: NavbarProps) => {
+// compound
+Navbar.NavbarItem = NavbarItem;
+
+// default navbar design
+const DefaultNavbar = (props: NavbarProps) => {
   const [showMenu, setShowMenu] = useState(false);
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -162,4 +164,4 @@ const Navbar = (props: NavbarProps) => {
   );
 };
 
-export default Navbar;
+export default DefaultNavbar;

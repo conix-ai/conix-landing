@@ -1,0 +1,15 @@
+.page#contact {
+  header {
+    background: url("/assets/contact/contact-cover.png");
+    background-position: center bottom;
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+
+    @media screen and (max-width: 768px) {
+      @apply h-96;
+    }
+    @media screen and (max-width: 425px) {
+      @apply h-48;
+    }
+  }
+}

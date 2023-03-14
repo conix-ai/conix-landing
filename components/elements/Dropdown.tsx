@@ -4,9 +4,9 @@ import clsx from "clsx";
 import React, { useState } from "react";
 
 type DropdownProps = {
-  Trigger: () => JSX.Element;
+  Trigger: (triggerProps: any) => JSX.Element;
   options: NavbarItemProps[];
-  onClick: (e: any) => void;
+  onClick?: (e: any) => void;
   children: (option: NavbarItemProps, active: boolean) => JSX.Element;
 };
 
@@ -15,14 +15,23 @@ const Dropdown = ({ Trigger, options, children, onClick }: DropdownProps) => {
 
   const toggleMenuOpen = (e: any) => {
     setIsMenuOpen(!isMenuOpen);
-    onClick(e);
+    onClick && onClick(e);
+  };
+
+  const onTriggerClick = toggleMenuOpen;
+  const onTriggerBlur = () => {
+    if (window.innerWidth > 425) toggleMenuOpen(false);
   };
 
   return (
     <div className="dropdown">
       <Menu>
-        <button className="btn btn-sm bg-transparent" onClick={toggleMenuOpen}>
-          <Trigger />
+        <button
+          className="btn btn-sm bg-transparent"
+          onClick={onTriggerClick}
+          onBlur={onTriggerBlur}
+        >
+          <Trigger isOpen={isMenuOpen} />
         </button>
 
         <Transition
@@ -37,7 +46,7 @@ const Dropdown = ({ Trigger, options, children, onClick }: DropdownProps) => {
           <Menu.Items className={clsx("menu", !isMenuOpen && "closed")}>
             {options.map((option, idx) => (
               <Menu.Item key={idx}>
-                {({ active }) => children(option, active)}
+                {({ active }) => children(option, isMenuOpen)}
               </Menu.Item>
             ))}
           </Menu.Items>
